@@ -1,0 +1,58 @@
+SITE « LE VIETNAM PAU » — MODE D'EMPLOI
+========================================
+
+Ce dossier est un site statique : aucun WordPress, aucune base de données,
+aucune installation. Il suffit de copier son contenu dans le dossier « www »
+de l'hébergement OVH (via FTP, FileZilla par exemple).
+
+Contenu
+-------
+index.html        la page du site (tout le texte, la carte, les horaires)
+css/style.css     les couleurs, polices et animations
+js/main.js        les effets (plateau qui tourne, onglets de la carte,
+                  statut « ouvert / fermé » en direct, menu mobile…)
+images/           favicon et photos des plats
+docs/             les cartes PDF à télécharger
+
+1. AVANT DE REMPLACER L'ANCIEN SITE
+   Faites une sauvegarde complète du dossier « www » actuel (FTP) :
+   il contient les photos et les PDF de l'ancien site dans wp-content/uploads.
+
+2. LES PHOTOS DES PLATS
+   Les photos de l'ancien site sont déjà intégrées dans images/plats/ (en .jpg).
+   Pour en changer une, remplacez le fichier en gardant exactement le même nom :
+     lard-porc-caramel.jpg, canard-laque.jpg, pho.jpg, nems.jpg,
+     boeuf-du-chef.jpg, ha-kao.jpg, xiu-mai.jpg
+   Si une photo manque, la vignette affiche à la place le nom du plat en vietnamien.
+   Idéalement, des photos d'au moins 1200 px de large (les actuelles font environ 400 px).
+
+3. LES CARTES PDF
+   docs/carte-a-emporter.pdf est déjà en place (carte du 14/11/26).
+   La carte sur place n'a pas de PDF à télécharger (retiré à la demande).
+   Pour mettre à jour la carte à emporter, remplacez le PDF en gardant le même nom.
+
+4. MODIFIER UN PRIX OU UN HORAIRE
+   Ouvrez index.html avec un éditeur de texte et cherchez le plat ou le jour.
+   La carte sur place est dans le bloc id="sur-place", la carte à emporter
+   dans le bloc id="a-emporter" (formules du midi et du soir comprises).
+   Si vous changez les horaires, modifiez aussi le bloc HOURS en haut de
+   js/main.js (il calcule le badge « Ouvert maintenant »).
+
+5. RÉFÉRENCEMENT GOOGLE
+   Fichiers à déposer avec le site (ils sont dans ce dossier) :
+     .htaccess    force https, redirige www vers viet-nam-pau.fr et les anciennes
+                  pages WordPress (?page_id=…) vers les bonnes sections.
+                  Fichier caché : activez l'affichage des fichiers cachés dans FileZilla.
+                  Il suppose que le certificat SSL (https) est actif sur l'hébergement OVH.
+     robots.txt   autorise Google à tout lire et indique le plan du site.
+     sitemap.xml  plan du site, à déclarer dans Google Search Console.
+
+   Après la mise en ligne :
+     a) Google Search Console (search.google.com/search-console) : ajoutez
+        viet-nam-pau.fr, puis envoyez https://viet-nam-pau.fr/sitemap.xml.
+     b) Fiche Google Business Profile (business.google.com) : c'est elle qui fait
+        apparaître le restaurant dans Google Maps et en haut des recherches
+        « restaurant vietnamien Pau ». Vérifiez que le nom, l'adresse, le téléphone
+        et les horaires sont exactement les mêmes que sur le site, mettez le lien
+        https://viet-nam-pau.fr, ajoutez des photos et répondez aux avis.
+     c) Testez les données structurées sur search.google.com/test/rich-results.

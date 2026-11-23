@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://viet-nam-pau.fr/sitemap.xml
