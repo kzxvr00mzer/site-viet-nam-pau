@@ -420,3 +420,11 @@ p { margin: 0; }
   .nav ul .nav-actions a::after { display: none; }
   .nav ul .nav-actions .btn-ico { margin: 0; }
 }
+/* Mention gluten lisible sur le fond rouge de la carte à emporter */
+.carte[data-mode="emporter"] .gluten { border-color: var(--gold-soft); color: var(--gold-soft); }
+.sides-list { grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
+.sides-list li > span:first-child { white-space: nowrap; }
+.sides-list .gluten { margin-left: .3rem; }
+.sides-list li::after { min-width: .4rem; }
+@media (min-width: 1000px) { .sides-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.sides-list li { gap: .3rem; } .sides-list .gluten { margin-left: .2rem; }
