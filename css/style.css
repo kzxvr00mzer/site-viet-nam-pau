@@ -121,8 +121,10 @@ p { margin: 0; }
 
 /* Le plateau tournant */
 .plateau { position: relative; margin: 0; display: grid; justify-items: center; gap: 1.4rem; z-index: 1; }
-.plateau-spin { width: min(620px, 100%); aspect-ratio: 1; filter: drop-shadow(0 40px 60px rgba(0, 0, 0, .45)); }
-.plateau-spin svg { width: 100%; height: 100%; transform: rotate(var(--rot, 0deg)); transition: transform .12s linear; }
+.plateau-spin { position: relative; width: min(620px, 100%); aspect-ratio: 1; }
+/* Ombre fixe sous le plateau (pas de filtre sur l'élément qui tourne : rotation plus fluide) */
+.plateau-spin::before { content: ""; position: absolute; inset: 6% 4% -4%; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0)); transform: translateY(5%); z-index: -1; }
+.plateau-spin svg { display: block; width: 100%; height: 100%; transform: rotate(0deg); will-change: transform; backface-visibility: hidden; }
 .plateau .dish { transition: filter .35s var(--ease); cursor: pointer; }
 .plateau .dish > circle:first-child { transition: stroke-width .35s var(--ease); stroke: var(--gold); stroke-width: 0; }
 .plateau .dish.is-lit > circle:first-child { stroke-width: 7; }

@@ -71,6 +71,15 @@
   const ticker = $('[data-ticker]');
   if (ticker) ticker.innerHTML += ticker.innerHTML; // boucle continue
   let lastY = scrollY, tickX = 0, tickDir = -1, ticking = false;
+  /* Rotation du plateau : on rattrape la position cible en douceur, image par image */
+  let rotTarget = scrollY * 0.12, rotNow = rotTarget, rotRunning = false;
+  function spinStep() {
+    rotNow += (rotTarget - rotNow) * 0.1;
+    if (Math.abs(rotTarget - rotNow) < 0.02) { rotNow = rotTarget; rotRunning = false; }
+    spin.style.transform = `rotate(${rotNow.toFixed(3)}deg)`;
+    if (rotRunning) requestAnimationFrame(spinStep);
+  }
+  if (!reduce && spin) spin.style.transform = `rotate(${rotNow}deg)`;
 
   function onScroll() {
     const y = scrollY;
@@ -78,7 +87,7 @@
     bar.style.setProperty('--p', max > 0 ? y / max : 0);
     nav.classList.toggle('is-scrolled', y > 40);
     if (!nav.classList.contains('is-open')) nav.classList.toggle('is-hidden', y > lastY && y > 500);
-    if (!reduce && spin) spin.style.setProperty('--rot', `${y * 0.12}deg`);
+    if (!reduce && spin) { rotTarget = y * 0.12; if (!rotRunning) { rotRunning = true; requestAnimationFrame(spinStep); } }
     tickDir = y >= lastY ? -1 : 1;
     lastY = y;
     ticking = false;
