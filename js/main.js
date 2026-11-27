@@ -81,11 +81,14 @@
   }
   if (!reduce && spin) spin.style.transform = `rotate(${rotNow}deg)`;
 
+  const fab = document.getElementById('fab');
+  if (fab) document.body.classList.add('has-fab');
   function onScroll() {
     const y = scrollY;
     const max = document.documentElement.scrollHeight - innerHeight;
     bar.style.setProperty('--p', max > 0 ? y / max : 0);
     nav.classList.toggle('is-scrolled', y > 40);
+    if (fab) fab.classList.toggle('is-on', y > innerHeight * 0.6);
     if (!nav.classList.contains('is-open')) nav.classList.toggle('is-hidden', y > lastY && y > 500);
     if (!reduce && spin) { rotTarget = y * 0.12; if (!rotRunning) { rotRunning = true; requestAnimationFrame(spinStep); } }
     tickDir = y >= lastY ? -1 : 1;
