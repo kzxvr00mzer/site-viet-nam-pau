@@ -429,28 +429,30 @@ p { margin: 0; }
 @media (min-width: 1000px) { .sides-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .sides-list li { gap: .3rem; } .sides-list .gluten { margin-left: .2rem; }
 
-/* La maison : illustration animée du bol de phở */
+/* La maison : bol de phở vu du dessus, animé */
 .maison-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
 .maison-art { margin: 0; width: 100%; max-width: 500px; justify-self: end; }
 .maison-art svg { display: block; width: 100%; height: auto; overflow: visible; }
-.maison-art .wisp { stroke-dasharray: 150; stroke-dashoffset: 150; opacity: 0; animation: ma-wisp 4.8s ease-in-out infinite; animation-delay: var(--d); }
-@keyframes ma-wisp {
-  0% { stroke-dashoffset: 150; opacity: 0; transform: translateY(0); }
-  25% { opacity: .55; }
-  60% { stroke-dashoffset: 0; opacity: .35; }
-  100% { stroke-dashoffset: -150; opacity: 0; transform: translateY(-26px); }
-}
+.maison-art .pho-swirl { animation: pho-spin 70s linear infinite; }
+@keyframes pho-spin { to { transform: rotate(360deg); } }
+.maison-art .pho-shine { animation: pho-shine 6s ease-in-out infinite; }
+@keyframes pho-shine { 0%, 100% { opacity: .1; } 50% { opacity: .24; } }
+.maison-art .pho-wisp { opacity: 0; animation: pho-wisp 5.1s ease-out infinite; animation-delay: var(--d); }
+@keyframes pho-wisp { 0% { opacity: 0; transform: translateY(14px) scaleY(.8); } 30% { opacity: .55; } 100% { opacity: 0; transform: translateY(-46px) scaleY(1.1); } }
+.maison-art .pho-wisp { transform-box: fill-box; transform-origin: 50% 100%; }
+.maison-art .pho-lift { animation: pho-lift 4.6s ease-in-out infinite; }
+@keyframes pho-lift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(14px, -16px); } }
+.maison-art .pho-strands { transform-box: fill-box; transform-origin: 50% 0; animation: pho-strands 4.6s ease-in-out infinite; }
+@keyframes pho-strands { 0%, 100% { transform: scaleY(.75); } 50% { transform: scaleY(1.12); } }
+.maison-art .pho-ripple { transform-box: fill-box; transform-origin: center; animation: pho-ripple 4.6s ease-out infinite; }
+@keyframes pho-ripple { 0%, 45% { transform: scale(.5); opacity: 0; } 60% { opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
 .maison-art .ma-bob { animation: ma-bob 5.5s ease-in-out infinite; animation-delay: var(--d); }
 @keyframes ma-bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(8deg); } }
-.maison-art .ma-lift { animation: ma-lift 4.4s ease-in-out infinite; }
-@keyframes ma-lift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-.maison-art .ma-ripple { transform-box: fill-box; transform-origin: center; animation: ma-ripple 4.4s ease-out infinite; }
-@keyframes ma-ripple { 0%, 40% { transform: scale(.6); opacity: 0; } 55% { opacity: .9; } 100% { transform: scale(2.4); opacity: 0; } }
 @media (max-width: 820px) {
   .maison-top { grid-template-columns: 1fr; }
   .maison-art { justify-self: center; max-width: 360px; margin-top: .5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .maison-art .wisp, .maison-art .ma-bob, .maison-art .ma-lift, .maison-art .ma-ripple { animation: none; }
-  .maison-art .wisp { stroke-dashoffset: 0; opacity: .35; }
+  .maison-art .pho-swirl, .maison-art .pho-shine, .maison-art .pho-wisp, .maison-art .pho-lift, .maison-art .pho-strands, .maison-art .pho-ripple, .maison-art .ma-bob { animation: none; }
+  .maison-art .pho-wisp { opacity: .3; }
 }
